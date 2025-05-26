@@ -4,11 +4,13 @@ public class Game extends Directions {
     private int score, height, width;
     private Snake snake;
     private Apple apple;
+    private char[][] board;
 
     public Game(int height, int width) {
         this.setHeight(height);
         this.setWidth(width);
         this.setScore(0);
+        this.board = generateBoard();
     }
 
     public void setHeight(int height) { 
@@ -31,6 +33,7 @@ public class Game extends Directions {
     public int getScore() { return this.score; }
     public Snake getSnake() { return this.snake; }
     public Apple getApple() { return this.apple; }
+    public char[][] getBoard() { return this.board; }
 
     public char[][] generateBoard() {
         char[][] board = new char[this.height][this.width];
@@ -51,19 +54,19 @@ public class Game extends Directions {
         return board;
     }
 
-    public void render(char[][] board) {
+    public void render() {
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++)
-                System.out.print(board[i][j]);
+                System.out.print(this.board[i][j]);
 
             System.out.println("");
         }
     }
 
-    public boolean hasCollided(char[][] board) {
+    public boolean hasCollided() {
         if (
-            board[this.snake.getBody().getFirst().getX()][this.snake.getBody().getFirst().getY()] != ' ' 
-            && board[this.snake.getBody().getFirst().getX()][this.snake.getBody().getFirst().getY()] != '*'
+            this.board[this.snake.getBody().getFirst().getX()][this.snake.getBody().getFirst().getY()] != ' ' 
+            && this.board[this.snake.getBody().getFirst().getX()][this.snake.getBody().getFirst().getY()] != '*'
         )
             return true;
         
