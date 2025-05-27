@@ -6,7 +6,6 @@ public class Main {
         char keyPressed;
 
         Game game = new Game(20, 50);
-        game.initializeGame();
 
         while (!game.hasCollided()) {
             keyPressed = input.next().charAt(0);

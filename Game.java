@@ -11,10 +11,19 @@ public class Game extends Directions {
     private static final char BLANK = ' ';
 
     public Game(int height, int width) {
+        Random random = new Random();
+
         this.setHeight(height);
         this.setWidth(width);
         this.setScore(0);
         this.board = generateBoard();
+
+        int appleX = random.nextInt(1, height - 2);
+        int appleY = random.nextInt(1, width - 2);
+
+        this.snake = new Snake(new CoordinateTuple<Integer, Integer>(10, 25), UP);
+        this.apple = new Apple(1, new CoordinateTuple<Integer, Integer>(appleX, appleY));
+        this.board[this.apple.getCoordinates().getX()][this.apple.getCoordinates().getY()] = APPLE_CHAR;
     }
 
     public void setHeight(int height) { 
@@ -102,15 +111,5 @@ public class Game extends Directions {
             return true;
 
         return false;
-    }
-
-    public void initializeGame() {
-        Random random = new Random();
-        int appleX = random.nextInt(1, height - 2);
-        int appleY = random.nextInt(1, width - 2);
-
-        this.snake = new Snake(new CoordinateTuple<Integer, Integer>(10, 25), UP);
-        this.apple = new Apple(1, new CoordinateTuple<Integer, Integer>(appleX, appleY));
-        this.board[this.apple.getCoordinates().getX()][this.apple.getCoordinates().getY()] = APPLE_CHAR;
     }
 }
