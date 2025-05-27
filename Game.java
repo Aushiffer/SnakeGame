@@ -8,6 +8,7 @@ public class Game extends Directions {
     private static final char HEAD_CHAR = '@';
     private static final char BODY_CHAR = 'O';
     private static final char APPLE_CHAR = '*';
+    private static final char BLANK = ' ';
 
     public Game(int height, int width) {
         this.setHeight(height);
@@ -50,7 +51,7 @@ public class Game extends Directions {
                 else if ((i == 0 || i == this.height - 1) && j != 0 && j != width - 1)
                     board[i][j] = '-';
                 else
-                    board[i][j] = ' ';
+                    board[i][j] = BLANK;
             }
         }
                 
@@ -78,14 +79,14 @@ public class Game extends Directions {
             int appleY = random.nextInt(1, width - 2);
 
             this.apple.setCoordinates(new CoordinateTuple<Integer, Integer>(appleX, appleY));
-            this.board[this.apple.getCoordinates().getX()][this.apple.getCoordinates().getY()] = '*';
+            this.board[this.apple.getCoordinates().getX()][this.apple.getCoordinates().getY()] = APPLE_CHAR;
         }
     }
 
     public boolean hasCollided() {
         if (
-            this.board[this.snake.getBody().getFirst().getX()][this.snake.getBody().getFirst().getY()] != ' ' 
-            && this.board[this.snake.getBody().getFirst().getX()][this.snake.getBody().getFirst().getY()] != '*'
+            this.board[this.snake.getBody().getFirst().getX()][this.snake.getBody().getFirst().getY()] != BLANK 
+            && this.board[this.snake.getBody().getFirst().getX()][this.snake.getBody().getFirst().getY()] != APPLE_CHAR
         )
             return false;
         
@@ -106,6 +107,6 @@ public class Game extends Directions {
 
         this.snake = new Snake(new CoordinateTuple<Integer, Integer>(10, 25), UP);
         this.apple = new Apple(1, new CoordinateTuple<Integer, Integer>(appleX, appleY));
-        this.board[this.apple.getCoordinates().getX()][this.apple.getCoordinates().getY()] = '*';
+        this.board[this.apple.getCoordinates().getX()][this.apple.getCoordinates().getY()] = APPLE_CHAR;
     }
 }
