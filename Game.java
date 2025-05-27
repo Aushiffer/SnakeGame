@@ -84,20 +84,24 @@ public class Game extends Directions {
     }
 
     public boolean hasCollided() {
-        if (
-            this.board[this.snake.getBody().getFirst().getX()][this.snake.getBody().getFirst().getY()] != BLANK 
-            && this.board[this.snake.getBody().getFirst().getX()][this.snake.getBody().getFirst().getY()] != APPLE_CHAR
-        )
-            return false;
+        CoordinateTuple<Integer, Integer> snakeHead = this.snake.getBody().getFirst();
+
+        for (CoordinateTuple<Integer, Integer> segment : this.snake.getBody()) {
+            if (snakeHead.getX() == segment.getX() && snakeHead.getY() == segment.getY())
+                return true;
+        }
         
-        return true;
+        return false;
     }
 
     public boolean hasObtainedApple() {
-        if (!(this.snake.getBody().getFirst().getX() == this.apple.getCoordinates().getX() && this.snake.getBody().getFirst().getY() == this.apple.getCoordinates().getY()))
-            return false;
+        CoordinateTuple<Integer, Integer> snakeHead = this.snake.getBody().getFirst();
+        CoordinateTuple<Integer, Integer> appleCoordinates = this.apple.getCoordinates();
 
-        return true;
+        if (snakeHead.getX() == appleCoordinates.getX() && snakeHead.getY() == appleCoordinates.getY())
+            return true;
+
+        return false;
     }
 
     public void initializeGame() {
