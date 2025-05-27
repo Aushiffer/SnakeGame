@@ -10,6 +10,7 @@ public class Main {
         }
 
         game.getSnake().moveStep(new CoordinateTuple<Integer, Integer>(10, 26));
+        game.getSnake().moveStep(new CoordinateTuple<Integer, Integer>(10, 27));
 
         System.out.println("\nNEW TUPLES");
 
@@ -17,9 +18,8 @@ public class Main {
             System.out.println("(" + segment.getX() + ", " + segment.getY() + ")");
         }
 
-        System.out.println("COLLISION: " + game.hasCollided());
-        
-        game.getBoard()[game.getApple().getCoordinates().getX()][game.getApple().getCoordinates().getY()] = '*';
+        game.updateBoard();
         game.render();
+        System.out.println("COLLISION: " + game.hasCollided());
     }
 }

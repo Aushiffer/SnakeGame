@@ -5,6 +5,9 @@ public class Game extends Directions {
     private Snake snake;
     private Apple apple;
     private char[][] board;
+    private static final char HEAD_CHAR = '@';
+    private static final char BODY_CHAR = 'O';
+    private static final char APPLE_CHAR = '*';
 
     public Game(int height, int width) {
         this.setHeight(height);
@@ -63,14 +66,26 @@ public class Game extends Directions {
         }
     }
 
+    public void updateBoard() {
+        for (int i = 0; i < this.snake.getBody().size(); i++)
+            this.board[this.snake.getBody().get(i).getX()][this.snake.getBody().get(i).getY()] = (i == 0) ? HEAD_CHAR : BODY_CHAR;
+    }
+
     public boolean hasCollided() {
         if (
             this.board[this.snake.getBody().getFirst().getX()][this.snake.getBody().getFirst().getY()] != ' ' 
             && this.board[this.snake.getBody().getFirst().getX()][this.snake.getBody().getFirst().getY()] != '*'
         )
-            return true;
+            return false;
         
-        return false;
+        return true;
+    }
+
+    public boolean hasObtainedApple() {
+        if (this.board[this.snake.getBody().getFirst().getX()][this.snake.getBody().getFirst().getY()] != '*')
+            return false;
+
+        return true;
     }
 
     public void initializeGame() {

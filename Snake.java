@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Snake {
     private CoordinateTuple<Integer, Integer> direction;
     private ArrayList<CoordinateTuple<Integer, Integer>> body = new ArrayList<CoordinateTuple<Integer, Integer>>();
-    private final int STARTING_SNAKE_SIZE = 4;
+    private static final int STARTING_SNAKE_SIZE = 4;
 
     public Snake(CoordinateTuple<Integer, Integer> startPosition, CoordinateTuple<Integer, Integer> startDirection) {
         if (startDirection != null && startDirection != null) {
