@@ -95,8 +95,10 @@ public class Game extends Directions {
     public boolean hasCollided() {
         CoordinateTuple<Integer, Integer> snakeHead = this.snake.getBody().getFirst();
 
-        for (CoordinateTuple<Integer, Integer> segment : this.snake.getBody()) {
-            if (snakeHead.getX() == segment.getX() && snakeHead.getY() == segment.getY())
+        for (int i = 1; i < this.snake.getBody().size(); i++) {
+            CoordinateTuple<Integer, Integer> currentSegment = this.snake.getBody().get(i);
+
+            if (snakeHead.getX() == currentSegment.getX() && snakeHead.getY() == currentSegment.getY())
                 return true;
         }
         

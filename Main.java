@@ -7,9 +7,11 @@ public class Main {
 
         Game game = new Game(20, 50);
 
-        while (!game.hasCollided()) {
+        do {
+            game.render();
+            System.out.print("Input: ");
             keyPressed = input.next().charAt(0);
-        }
+        } while (!game.hasCollided());
 
         input.close();
     }
