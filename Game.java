@@ -58,6 +58,8 @@ public class Game extends Directions {
     }
 
     public void render() {
+        this.updateBoard();
+
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++)
                 System.out.print(this.board[i][j]);
@@ -69,6 +71,15 @@ public class Game extends Directions {
     public void updateBoard() {
         for (int i = 0; i < this.snake.getBody().size(); i++)
             this.board[this.snake.getBody().get(i).getX()][this.snake.getBody().get(i).getY()] = (i == 0) ? HEAD_CHAR : BODY_CHAR;
+
+        if (this.hasObtainedApple()) {
+            Random random = new Random();
+            int appleX = random.nextInt(1, height - 2);
+            int appleY = random.nextInt(1, width - 2);
+
+            this.apple.setCoordinates(new CoordinateTuple<Integer, Integer>(appleX, appleY));
+            this.board[this.apple.getCoordinates().getX()][this.apple.getCoordinates().getY()] = '*';
+        }
     }
 
     public boolean hasCollided() {
@@ -82,7 +93,7 @@ public class Game extends Directions {
     }
 
     public boolean hasObtainedApple() {
-        if (this.board[this.snake.getBody().getFirst().getX()][this.snake.getBody().getFirst().getY()] != '*')
+        if (!(this.snake.getBody().getFirst().getX() == this.apple.getCoordinates().getX() && this.snake.getBody().getFirst().getY() == this.apple.getCoordinates().getY()))
             return false;
 
         return true;
@@ -95,5 +106,6 @@ public class Game extends Directions {
 
         this.snake = new Snake(new CoordinateTuple<Integer, Integer>(10, 25), UP);
         this.apple = new Apple(1, new CoordinateTuple<Integer, Integer>(appleX, appleY));
+        this.board[this.apple.getCoordinates().getX()][this.apple.getCoordinates().getY()] = '*';
     }
 }

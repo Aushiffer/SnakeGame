@@ -18,8 +18,8 @@ public class Main {
             System.out.println("(" + segment.getX() + ", " + segment.getY() + ")");
         }
 
-        game.updateBoard();
         game.render();
         System.out.println("COLLISION: " + game.hasCollided());
+        System.out.println("OBTAINED APPLE: " + game.hasObtainedApple());
     }
 }
