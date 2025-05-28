@@ -7,10 +7,6 @@ public class CoordinateTuple<Fst, Snd> {
         this.setY(y);
     }
 
-    public CoordinateTuple() {
-    
-    }
-
     public void setX(Fst x) { this.x = x; }
     public void setY(Snd y) { this.y = y; }
     public Fst getX() { return this.x; }

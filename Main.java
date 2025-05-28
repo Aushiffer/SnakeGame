@@ -19,26 +19,22 @@ public class Main {
 
             if (keyPressed == 'w') {
                 stepCoordinates.setX(snakeHead.getX() + Directions.UP.getX());
-                game.getSnake().moveStep(stepCoordinates);
                 game.getSnake().setDirection(Directions.UP);
             } else if (keyPressed == 's') {
                 stepCoordinates.setX(snakeHead.getX() + Directions.DOWN.getX());
-                game.getSnake().moveStep(stepCoordinates);
                 game.getSnake().setDirection(Directions.DOWN);
             } else if (keyPressed == 'a') {
                 stepCoordinates.setY(snakeHead.getY() + Directions.LEFT.getY());
-                game.getSnake().moveStep(stepCoordinates);
                 game.getSnake().setDirection(Directions.LEFT);
             } else if (keyPressed == 'd') {
                 stepCoordinates.setY(snakeHead.getY() + Directions.RIGHT.getY());
-                game.getSnake().moveStep(stepCoordinates);
                 game.getSnake().setDirection(Directions.RIGHT);
             } else {
                 stepCoordinates.setX(snakeHead.getX() + snakeDirection.getX());
                 stepCoordinates.setY(snakeHead.getY() + snakeDirection.getY());
-                game.getSnake().moveStep(stepCoordinates);
             }
 
+            game.getSnake().moveStep(stepCoordinates);
             game.updateScore();
         } while (!game.hasCollided());
 
