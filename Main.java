@@ -13,28 +13,29 @@ public class Main {
             System.out.print("Input: ");
             keyPressed = input.next().charAt(0);
 
-            CoordinateTuple<Integer, Integer> snakeDirection = game.getSnake().getDirection();
-            CoordinateTuple<Integer, Integer> snakeHead = game.getSnake().getBody().getFirst();
+            Snake snake = game.getSnake();
+            CoordinateTuple<Integer, Integer> snakeDirection = snake.getDirection();
+            CoordinateTuple<Integer, Integer> snakeHead = snake.getBody().getFirst();
             CoordinateTuple<Integer, Integer> stepCoordinates = new CoordinateTuple<Integer, Integer>(snakeHead.getX(), snakeHead.getY());
 
             if (keyPressed == 'w') {
                 stepCoordinates.setX(snakeHead.getX() + Directions.UP.getX());
-                game.getSnake().setDirection(Directions.UP);
+                snake.setDirection(Directions.UP);
             } else if (keyPressed == 's') {
                 stepCoordinates.setX(snakeHead.getX() + Directions.DOWN.getX());
-                game.getSnake().setDirection(Directions.DOWN);
+                snake.setDirection(Directions.DOWN);
             } else if (keyPressed == 'a') {
                 stepCoordinates.setY(snakeHead.getY() + Directions.LEFT.getY());
-                game.getSnake().setDirection(Directions.LEFT);
+                snake.setDirection(Directions.LEFT);
             } else if (keyPressed == 'd') {
                 stepCoordinates.setY(snakeHead.getY() + Directions.RIGHT.getY());
-                game.getSnake().setDirection(Directions.RIGHT);
+                snake.setDirection(Directions.RIGHT);
             } else {
                 stepCoordinates.setX(snakeHead.getX() + snakeDirection.getX());
                 stepCoordinates.setY(snakeHead.getY() + snakeDirection.getY());
             }
 
-            game.getSnake().moveStep(stepCoordinates);
+            snake.moveStep(stepCoordinates);
             game.updateScore();
         } while (!game.hasCollided());
 

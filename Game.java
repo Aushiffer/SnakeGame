@@ -94,7 +94,7 @@ public class Game {
             int appleY = random.nextInt(1, width - 2);
 
             this.apple.setCoordinates(new CoordinateTuple<Integer, Integer>(appleX, appleY));
-            this.board[this.apple.getCoordinates().getX()][this.apple.getCoordinates().getY()] = APPLE_CHAR;
+            this.board[appleX][appleY] = APPLE_CHAR;
         }
     }
 
