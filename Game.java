@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Game extends Directions {
+public class Game {
     private int score, height, width;
     private Snake snake;
     private Apple apple;
@@ -21,9 +21,9 @@ public class Game extends Directions {
         int appleX = random.nextInt(1, height - 2);
         int appleY = random.nextInt(1, width - 2);
 
-        this.snake = new Snake(new CoordinateTuple<Integer, Integer>(10, 25), UP);
+        this.snake = new Snake(new CoordinateTuple<Integer, Integer>(10, 10), Directions.UP);
         this.apple = new Apple(1, new CoordinateTuple<Integer, Integer>(appleX, appleY));
-        this.board[this.apple.getCoordinates().getX()][this.apple.getCoordinates().getY()] = APPLE_CHAR;
+        this.board[appleX][appleY] = APPLE_CHAR;
     }
 
     public void setHeight(int height) { 
@@ -79,8 +79,14 @@ public class Game extends Directions {
     }
 
     public void updateBoard() {
-        for (int i = 0; i < this.snake.getBody().size(); i++)
-            this.board[this.snake.getBody().get(i).getX()][this.snake.getBody().get(i).getY()] = (i == 0) ? HEAD_CHAR : BODY_CHAR;
+        for (int i = 0; i < this.snake.getBody().size(); i++) {
+            if (i == 0)
+                this.board[this.snake.getBody().get(i).getX()][this.snake.getBody().get(i).getY()] = HEAD_CHAR;
+            else if (i == this.snake.getBody().size() - 1)
+                this.board[this.snake.getBody().get(i).getX()][this.snake.getBody().get(i).getY()] = BLANK;
+            else
+                this.board[this.snake.getBody().get(i).getX()][this.snake.getBody().get(i).getY()] = BODY_CHAR;
+        }
 
         if (this.hasObtainedApple()) {
             Random random = new Random();
@@ -92,13 +98,21 @@ public class Game extends Directions {
         }
     }
 
+    public void updateScore() {
+        if (this.hasObtainedApple())
+            this.score += this.getApple().getPoints();
+    }
+
     public boolean hasCollided() {
         CoordinateTuple<Integer, Integer> snakeHead = this.snake.getBody().getFirst();
 
         for (int i = 1; i < this.snake.getBody().size(); i++) {
             CoordinateTuple<Integer, Integer> currentSegment = this.snake.getBody().get(i);
 
-            if (snakeHead.getX() == currentSegment.getX() && snakeHead.getY() == currentSegment.getY())
+            if (
+                (snakeHead.getX() == currentSegment.getX() && snakeHead.getY() == currentSegment.getY())
+                || (this.board[snakeHead.getX()][snakeHead.getY()] == '-' || this.board[snakeHead.getX()][snakeHead.getY()] == '|')
+            )
                 return true;
         }
         
