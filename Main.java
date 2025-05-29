@@ -5,7 +5,7 @@ public class Main {
         Scanner input = new Scanner(System.in);
         char keyPressed;
 
-        Game game = new Game(20, 50);
+        Game game = new Game(10, 15);
 
         do {
             game.render();

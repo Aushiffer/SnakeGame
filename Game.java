@@ -21,7 +21,7 @@ public class Game {
         int appleX = random.nextInt(1, height - 2);
         int appleY = random.nextInt(1, width - 2);
 
-        this.snake = new Snake(new CoordinateTuple<Integer, Integer>(10, 10), Directions.UP);
+        this.snake = new Snake(new CoordinateTuple<Integer, Integer>(5, 5), Directions.UP);
         this.apple = new Apple(1, new CoordinateTuple<Integer, Integer>(appleX, appleY));
         this.board[appleX][appleY] = APPLE_CHAR;
     }
