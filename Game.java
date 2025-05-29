@@ -80,12 +80,14 @@ public class Game {
 
     public void updateBoard() {
         for (int i = 0; i < this.snake.getBody().size(); i++) {
+            CoordinateTuple<Integer, Integer> currentSegment = this.snake.getBody().get(i);
+
             if (i == 0)
-                this.board[this.snake.getBody().get(i).getX()][this.snake.getBody().get(i).getY()] = HEAD_CHAR;
+                this.board[currentSegment.getX()][currentSegment.getY()] = HEAD_CHAR;
             else if (i == this.snake.getBody().size() - 1)
-                this.board[this.snake.getBody().get(i).getX()][this.snake.getBody().get(i).getY()] = BLANK;
+                this.board[currentSegment.getX()][currentSegment.getY()] = BLANK;
             else
-                this.board[this.snake.getBody().get(i).getX()][this.snake.getBody().get(i).getY()] = BODY_CHAR;
+                this.board[currentSegment.getX()][currentSegment.getY()] = BODY_CHAR;
         }
 
         if (this.hasObtainedApple()) {
@@ -101,6 +103,12 @@ public class Game {
     public void updateScore() {
         if (this.hasObtainedApple())
             this.score += this.getApple().getPoints();
+    }
+
+    public void updateSnake() {
+        if (this.hasObtainedApple()) {
+
+        }
     }
 
     public boolean hasCollided() {
