@@ -68,6 +68,7 @@ public class Game {
     }
 
     public void render() {
+        this.updateSnake();
         this.updateBoard();
 
         for (int i = 0; i < this.height; i++) {
@@ -107,7 +108,9 @@ public class Game {
 
     public void updateSnake() {
         if (this.hasObtainedApple()) {
+            CoordinateTuple<Integer, Integer> snakeTail = this.snake.getBody().getLast();
 
+            this.getSnake().addSegment(new CoordinateTuple<Integer, Integer>(snakeTail.getX(), snakeTail.getY()));
         }
     }
 
